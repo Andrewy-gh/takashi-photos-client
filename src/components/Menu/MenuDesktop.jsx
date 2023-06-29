@@ -5,6 +5,14 @@ import ImageUpload from '../ImageUpload';
 import Default from '../../assets/default.png';
 import { theme } from '../../styles/styles';
 
+const activeStyle = {
+  color: theme.palette.custom.main,
+};
+
+const inActiveStyle = {
+  color: theme.palette.custom.light,
+};
+
 const flexColumns = {
   display: 'flex',
   flexDirection: 'column',
@@ -23,19 +31,15 @@ const typographyStyle = {
   cursor: 'pointer',
 };
 
-export default function MenuDesktop({ navigation }) {
-  // {  user, filter, setImageFilter }
-  // const handleClick = (filter) => {
-  //   setImageFilter(filter);
-  // };
+export default function MenuDesktop({ filter, navigation, setImageFilter }) {
+  const handleClick = (filter) => {
+    setImageFilter(filter);
+  };
   return (
     <Container sx={sticky}>
       <div style={{ ...flexColumns, padding: theme.spacing(6) }}>
         <Link to="/">
-          <div
-            style={{ minWidth: 200 }}
-            // onClick={() => handleClick(null)}
-          >
+          <div style={{ minWidth: 200 }} onClick={() => handleClick(null)}>
             <img src={Default} alt="logo" />
           </div>
         </Link>
@@ -47,7 +51,9 @@ export default function MenuDesktop({ navigation }) {
                 variant="h6"
                 sx={{
                   ...typographyStyle,
+                  ...(filter === nav.filter ? activeStyle : inActiveStyle),
                 }}
+                onClick={() => handleClick(nav.filter)}
               >
                 {nav.name}
               </Typography>
@@ -59,28 +65,6 @@ export default function MenuDesktop({ navigation }) {
               </Link>
             )
           )}
-          {/* Original syntax */}
-          {/* {navigation.map((nav) =>
-              nav.type === 'filter' ? (
-                <Typography
-                  key={nav.id}
-                  variant="h6"
-                  sx={{
-                    ...typographyStyle,
-                    ...(filter === nav.filter ? activeStyle : inActiveStyle),
-                  }}
-                  onClick={() => handleClick(nav.filter)}
-                >
-                  {nav.name}
-                </Typography>
-              ) : (
-                <Link to={nav.path} key={nav.id}>
-                  <Typography variant="h6" sx={typographyStyle}>
-                    {nav.name}
-                  </Typography>
-                </Link>
-              )
-            )} */}
           <ImageUpload />
         </div>
       </div>

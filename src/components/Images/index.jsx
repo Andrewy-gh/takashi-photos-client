@@ -4,7 +4,11 @@ import CldImage from './CldImage';
 
 export default function Images() {
   const { data } = useSelector(({ images }) => images);
+  const filter = useSelector(({ filter }) => filter);
   const cloudName = useSelector(({ cloudName }) => cloudName);
+  const images =
+    filter === null ? data : data.filter((image) => image.type === filter);
+
   return (
     <Masonry
       variant="masonry"
@@ -12,7 +16,7 @@ export default function Images() {
       spacing={1}
       sx={{ marginInline: 'auto', paddingInline: { laptop: 2 } }}
     >
-      {data.map((image) => (
+      {images.map((image) => (
         <div key={image.id}>
           <CldImage cloudName={cloudName} cloudinaryId={image.cloudinaryId} />
         </div>

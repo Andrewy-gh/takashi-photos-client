@@ -1,42 +1,33 @@
-// TODO: insert useMediaQuery
+import { useDispatch, useSelector } from 'react-redux';
 import { useMediaQuery } from '@mui/material/';
-
 import MenuDesktop from './MenuDesktop';
 import MenuMobile from './MenuMobile';
+import { filterImages } from '../../features/filterSlice';
 import { theme } from '../../styles/styles';
 import navigation from '../../data/navigation';
 
-const activeStyle = {
-  color: theme.palette.custom.main,
-};
-
-const inActiveStyle = {
-  color: theme.palette.custom.light,
-};
-
 export default function Menu() {
-  // const dispatch = useDispatch();
-
+  const dispatch = useDispatch();
+  const filter = useSelector(({ filter }) => filter);
   const isMobile = useMediaQuery(theme.breakpoints.down('tablet'));
 
-  // const { filter, user } = useSelector(({ filter, user }) => ({
-  //   filter,
-  //   user,
-  // }));
-  // const setImageFilter = (filter) => {
-  //   dispatch(filterImages(filter));
-  // };
+  const setImageFilter = (filter) => {
+    dispatch(filterImages(filter));
+  };
 
   return (
     <>
       {isMobile ? (
-        <MenuMobile navigation={navigation} />
+        <MenuMobile
+          filter={filter}
+          navigation={navigation}
+          setImageFilter={setImageFilter}
+        />
       ) : (
         <MenuDesktop
+          filter={filter}
           navigation={navigation}
-          // user={user}
-          // setImageFilter={setImageFilter}
-          // filter={filter}
+          setImageFilter={setImageFilter}
         />
       )}
     </>
