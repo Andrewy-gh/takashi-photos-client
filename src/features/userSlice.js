@@ -1,12 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getToken } from '../utils/index';
-
-const userToken = document.cookie ? getToken() : null;
-const loggedIn = document.cookie ? true : false;
+import { login } from '../services/login';
 
 const initialState = {
-  loggedIn,
-  userToken,
+  loggedIn: false,
+  token: null,
 };
 
 const userSlice = createSlice({
@@ -14,14 +11,22 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     logout(state) {
-      document.cookie =
-        'jwtPortfolioApp= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
       state.loggedIn = false;
-      state.userToken = null;
+      state.token = null;
+    },
+    setCredentials(state, action) {
+      state.loggedIn = true;
+      state.token = action.payload.token;
     },
   },
 });
 
-export const { logout } = userSlice.actions;
+export const { logout, setCredentials } = userSlice.actions;
+export const loginUser = (credentials) => {
+  return async (dispatch) => {
+    const userToken = await login(credentials);
+    dispatch(setCredentials(userToken));
+  };
+};
 
 export default userSlice.reducer;

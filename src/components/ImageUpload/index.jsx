@@ -25,25 +25,17 @@ export default function ImageUpload() {
   };
 
   const submitImageData = (data) => {
-    console.log('index data:', data);
     const formData = new FormData();
     for (const image of images) {
       formData.append('file', image.data);
     }
     formData.append('title', data.title);
     formData.append('type', data.type);
-
-    // dispatch(createPost(formData));
-
-    // if success, clear images
-    console.log(formData);
     dispatch(uploadNewImage(formData));
-    console.log('submit successful');
     setImages([]);
   };
 
   const previewImages = (images) => {
-    console.log('index file, previewImages: ', images);
     setImages(images);
   };
 

@@ -3,7 +3,6 @@ import imageService from '../services/image';
 
 const initialState = {
   data: [],
-  //   message: '',
 };
 
 const imageSlice = createSlice({
@@ -11,15 +10,11 @@ const imageSlice = createSlice({
   initialState,
   reducers: {
     addNewImage(state, action) {
-      const { message, images } = action.payload;
-      console.log('upload successful', { message, images });
-      // state.message = message;
-      // console.log(action.payload);
+      const images = action.payload;
       state.data.push(...images);
     },
     removeImage(state, action) {
       const id = action.payload;
-      //   state.message = "image removed";
       state.data = state.data.filter((image) => image.id !== id);
     },
     setImages(state, action) {
@@ -33,23 +28,13 @@ const imageSlice = createSlice({
     },
     updateOrder(state, action) {
       const updatedOrder = action.payload;
-      //   state.message = "Order updated";
       state.data = state.data.map((image, i) => (image = updatedOrder[i]));
     },
-    // setMessage(state, action) {
-    //   state.message = action.payload;
-    // },
   },
 });
 
-export const {
-  updateOrder,
-  updateImage,
-  removeImage,
-  addNewImage,
-  setImages,
-  //   setMessage,
-} = imageSlice.actions;
+export const { updateOrder, updateImage, removeImage, addNewImage, setImages } =
+  imageSlice.actions;
 export const getAllImages = () => {
   return async (dispatch) => {
     const images = await imageService.getAllImages();
@@ -58,9 +43,7 @@ export const getAllImages = () => {
 };
 export const updateOneImage = (id, content) => {
   return async (dispatch) => {
-    console.log('thunk received');
     const updatedimage = await imageService.updateOneImage(id, content);
-    console.log('thunk response: ', updatedimage);
     dispatch(updateImage(updatedimage));
   };
 };
@@ -71,10 +54,8 @@ export const updateImageOrder = (order) => {
   };
 };
 export const uploadNewImage = (content) => {
-  console.log('features received:', content);
   return async (dispatch) => {
     const response = await imageService.uploadNewImage(content);
-    console.log('feature response:', response);
     if (response.success) {
       dispatch(addNewImage(response));
     }

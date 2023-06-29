@@ -80,7 +80,6 @@ export default function UploadForm({
 
   useEffect(() => {
     if (formState.isSubmitSuccessful) {
-      console.log('form state: form submit is successful');
       reset({ title: '', type: '', file: undefined });
       handleClose();
     }
@@ -92,17 +91,7 @@ export default function UploadForm({
     .map((n) => ({ id: n.id, name: n.name }));
 
   const onSubmit = (data) => {
-    // const formData = new FormData();
-    // for (const image of images) {
-    //   formData.append('file', image.data);
-    // }
-    // formData.append('title', data.title);
-    // formData.append('type', data.type);
-    // formData.append('project', data.project);
-    // setImages([]);
-    console.log('submitting data: ', data);
     submitImageData(data);
-    // dispatch(createPost(formData));
   };
 
   const prepareImagePreview = (files) => {

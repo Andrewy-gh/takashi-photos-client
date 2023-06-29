@@ -1,14 +1,9 @@
-// import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import IconButton from '@mui/material/IconButton';
 import { theme } from '../styles/styles';
 import Typography from '@mui/material/Typography';
-// import Admin from '../components/Menu/Admin';
-// import LogoutButton from '../components/Menu/LogoutButton';
-import LoginButton from '../components/Menu/LoginButton';
 import ProfileCover from '../assets/profile-cover.png';
-// import postServices from '../services/posts';
 
 const HeaderStyle = {
   lineHeight: '1.6',
@@ -23,10 +18,6 @@ const BodyStyle = {
 };
 
 export default function Profile() {
-  // const user = useSelector(({ user }) => user);
-  // if (user.loggedIn) {
-  //   postServices.setToken(user.userToken);
-  // }
   return (
     <div
       style={{
@@ -90,10 +81,7 @@ export default function Profile() {
           placeSelf: 'center end',
           padding: '2rem',
         }}
-      >
-        {/* {user.loggedIn ? <LogoutButton /> : <LoginButton />} */}
-        <LoginButton />
-      </div>
+      ></div>
     </div>
   );
 }

@@ -81,7 +81,6 @@ export default function MenuDesktop({ navigation }) {
                 </Link>
               )
             )} */}
-          {/* {user.loggedIn ? <Admin /> : <LoginButton />} */}
           <ImageUpload />
         </div>
       </div>
