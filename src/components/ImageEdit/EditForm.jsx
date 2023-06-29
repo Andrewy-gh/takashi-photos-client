@@ -55,9 +55,11 @@ export default function EditForm({ handleClose, image, updateImage }) {
   const [title, setTitle] = useState(image.title);
   const [type, setType] = useState(image.type);
   const isMobile = useMediaQuery(theme.breakpoints.down('tablet'));
-  const types = navigation
-    .filter((n) => n.type === 'filter')
-    .map((n) => ({ id: n.id, name: n.name }));
+  const types = [
+    { id: 1, name: 'Nature' },
+    { id: 2, name: 'Cityscapes' },
+    { id: 3, name: 'Extras' },
+  ];
 
   const handleSubmit = () => {
     updateImage({ title, type });

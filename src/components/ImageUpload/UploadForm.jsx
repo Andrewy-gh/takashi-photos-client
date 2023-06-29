@@ -23,8 +23,6 @@ import CloseIcon from '@mui/icons-material/Close';
 // import { createPost } from '../reducers/postReducer';
 // import { logout } from '../reducers/userReducer';
 
-import navigation from '../../data/navigation';
-
 import { theme } from '../../styles/styles';
 
 const fieldSpacing = {
@@ -86,9 +84,11 @@ export default function UploadForm({
   }, [formState, reset]);
 
   const isMobile = useMediaQuery(theme.breakpoints.down('tablet'));
-  const types = navigation
-    .filter((n) => n.type === 'filter')
-    .map((n) => ({ id: n.id, name: n.name }));
+  const types = [
+    { id: 1, name: 'Nature' },
+    { id: 2, name: 'Cityscapes' },
+    { id: 3, name: 'Extras' },
+  ];
 
   const onSubmit = (data) => {
     submitImageData(data);
