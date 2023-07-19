@@ -10,18 +10,28 @@ import { getAllImages } from './features/imageSlice';
 import { getCloudName } from './features/cloudinarySlice';
 import { setCredentials } from './features/userSlice';
 import { getToken } from './services/authStorage';
-import { disableReactDevTools } from '@fvilers/disable-react-devtools';
 
+import { useAuth } from './hooks/useAuth';
+import { useCloudinary } from './hooks/useCloudinary';
+import { useImage } from './hooks/useImage';
+
+import { disableReactDevTools } from '@fvilers/disable-react-devtools';
 if (process.env.NODE_ENV === 'production') disableReactDevTools();
 
 export default function App() {
+  const { loggedIn, token, handleLogin, handleLogout } = useAuth();
+  const { cloudName } = useCloudinary();
+  const { images, handleRemoveImage } = useImage();
+
   const dispatch = useDispatch();
 
+  // delete
   useEffect(() => {
     dispatch(getCloudName());
     dispatch(getAllImages());
   }, [dispatch]);
 
+  // delete
   useEffect(() => {
     const loggedUser = getToken();
     if (loggedUser) {
@@ -33,10 +43,23 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/*" element={<Home />} />
-        <Route path="/edit" element={<Edit />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route
+          path="/*"
+          element={<Home cloudName={cloudName} images={images} />}
+        />
+        {/* <Route path="/*" element={<Home />} /> */}
+        {/* <Route path="/edit" element={<Edit />} /> */}
+        <Route
+          path="/login"
+          element={
+            <Login
+              loggedIn={loggedIn}
+              token={token}
+              handleLogin={handleLogin}
+            />
+          }
+        />
+        {/* <Route path="/profile" element={<Profile />} />  */}
       </Routes>
     </BrowserRouter>
   );
