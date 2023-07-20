@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import ImageUpload from '../ImageUpload';
-import Default from '../../assets/default.png';
+import Default from '../../assets/default.avif';
 import { theme } from '../../styles/styles';
 
 const activeStyle = {
@@ -33,10 +33,11 @@ const typographyStyle = {
 
 export default function MenuDesktop({
   filter,
-  navigation,
-  setImageFilter,
-  uploadNewImage,
   handleFilterChange,
+  handleLogout,
+  loggedIn,
+  navigation,
+  uploadNewImage,
 }) {
   return (
     <Container sx={sticky}>
@@ -70,6 +71,15 @@ export default function MenuDesktop({
                 </Typography>
               </Link>
             )
+          )}
+          {loggedIn && (
+            <Typography
+              variant="h6"
+              sx={typographyStyle}
+              onClick={handleLogout}
+            >
+              Logout
+            </Typography>
           )}
           <ImageUpload uploadNewImage={uploadNewImage} />
         </div>

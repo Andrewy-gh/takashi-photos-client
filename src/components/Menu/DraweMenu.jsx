@@ -28,7 +28,13 @@ const buttonStyle = {
     'linear-gradient(90deg, rgba(104,94,80,1) 0%, rgba(149,129,111,1) 35%, rgba(179,153,132,1) 100%)',
 };
 
-export default function DraweMenu({ filter, navigation, handleFilterChange }) {
+export default function DraweMenu({
+  filter,
+  handleFilterChange,
+  loggedIn,
+  handleLogout,
+  navigation,
+}) {
   const [open, setOpen] = useState(false);
 
   const getList = () => (
@@ -56,6 +62,14 @@ export default function DraweMenu({ filter, navigation, handleFilterChange }) {
             </Link>
           </ListItem>
         )
+      )}
+      {loggedIn && (
+        <ListItem onClick={handleLogout} style={{ cursor: 'pointer' }}>
+          <ListItemText
+            primary={'Logout'}
+            primaryTypographyProps={{ variant: 'h3' }}
+          />
+        </ListItem>
       )}
     </Box>
   );

@@ -3,7 +3,13 @@ import Menu from '../components/Menu';
 import Images from '../components/Images/index';
 import { useFilter } from '../hooks/useFilter';
 
-export default function Home({ cloudName, images, uploadNewImage }) {
+export default function Home({
+  cloudName,
+  handleLogout,
+  images,
+  loggedIn,
+  uploadNewImage,
+}) {
   const { filter, handleFilterChange } = useFilter();
   const filteredImages =
     filter === null ? images : images.filter((image) => image.type === filter);
@@ -17,8 +23,10 @@ export default function Home({ cloudName, images, uploadNewImage }) {
         <Grid item mobile={12} tablet={3}>
           <Menu
             filter={filter}
-            uploadNewImage={uploadNewImage}
             handleFilterChange={handleFilterChange}
+            handleLogout={handleLogout}
+            loggedIn={loggedIn}
+            uploadNewImage={uploadNewImage}
           />
         </Grid>
         <Grid item mobile={12} tablet={9} sx={{ tablet: { padding: '.5em' } }}>

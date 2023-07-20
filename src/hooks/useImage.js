@@ -15,7 +15,7 @@ export function useImage() {
 
   const uploadNewImage = async (content) => {
     const newImage = await imageServices.uploadNewImage(content);
-    setImages(images.concat(newImage));
+    setImages(images.concat(newImage.images));
   };
 
   const updateImageDetails = async (id, content) => {

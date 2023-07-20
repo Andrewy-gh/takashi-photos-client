@@ -14,6 +14,7 @@ const flexCol = {
 const listItem = {
   display: 'flex',
   justifyContent: 'space-between',
+  gap: '.5em',
   border: 'solid 2px #d0d0d0',
   borderRadius: '.2em',
   padding: '.5em .2em .5em .5em',

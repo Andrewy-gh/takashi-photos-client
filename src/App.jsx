@@ -44,6 +44,8 @@ export default function App() {
             <Home
               cloudName={cloudName}
               images={images}
+              loggedIn={loggedIn}
+              handleLogout={handleLogout}
               uploadNewImage={uploadNewImage}
             />
           }

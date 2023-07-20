@@ -20,7 +20,14 @@ const logoStyle = {
     'linear-gradient(90deg, rgba(104,94,80,1) 0%, rgba(149,129,111,1) 35%, rgba(179,153,132,1) 100%)',
 };
 
-export default function MenuMobile({ filter, navigation, handleFilterChange }) {
+export default function MenuMobile({
+  filter,
+  handleFilterChange,
+  handleLogout,
+  loggedIn,
+  navigation,
+  uploadNewImage,
+}) {
   return (
     <div style={{ paddingInline: '.5rem' }}>
       <div style={flex}>
@@ -35,6 +42,8 @@ export default function MenuMobile({ filter, navigation, handleFilterChange }) {
           navigation={navigation}
           filter={filter}
           handleFilterChange={handleFilterChange}
+          handleLogout={handleLogout}
+          loggedIn={loggedIn}
         />
       </div>
       <ImageUpload uploadNewImage={uploadNewImage} />

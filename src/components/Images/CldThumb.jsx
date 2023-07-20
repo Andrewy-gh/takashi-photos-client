@@ -1,10 +1,4 @@
 import { useMemo } from 'react';
-import {
-  AdvancedImage,
-  lazyload,
-  responsive,
-  placeholder,
-} from '@cloudinary/react';
 import { Cloudinary } from '@cloudinary/url-gen';
 import { name } from '@cloudinary/url-gen/actions/namedTransformation';
 

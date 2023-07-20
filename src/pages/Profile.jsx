@@ -3,7 +3,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import IconButton from '@mui/material/IconButton';
 import { theme } from '../styles/styles';
 import Typography from '@mui/material/Typography';
-import ProfileCover from '../assets/profile-cover.png';
+import ProfileCover from '../assets/profile-cover.avif';
 
 const HeaderStyle = {
   lineHeight: '1.6',
