@@ -2,7 +2,7 @@ import Grid from '@mui/material/Grid';
 import Menu from '../components/Menu';
 import Images from '../components/Images/index';
 
-export default function Home({ cloudName, images }) {
+export default function Home({ cloudName, images, uploadNewImage }) {
   return (
     <>
       <Grid
@@ -11,7 +11,7 @@ export default function Home({ cloudName, images }) {
         sx={{ gap: { mobile: '1.25rem', tablet: '0' } }}
       >
         <Grid item mobile={12} tablet={3}>
-          <Menu />
+          <Menu uploadNewImage={uploadNewImage} />
         </Grid>
         <Grid item mobile={12} tablet={9} sx={{ tablet: { padding: '.5em' } }}>
           <Images cloudName={cloudName} images={images} />

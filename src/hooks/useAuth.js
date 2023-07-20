@@ -16,7 +16,12 @@ export function useAuth() {
     setToken(null);
   };
 
-  return { loggedIn, token, handleLogin, handleLogout };
+  const setCredentials = (credentials) => {
+    setLoggedIn(true);
+    setToken(credentials);
+  };
+
+  return { loggedIn, token, handleLogin, handleLogout, setCredentials };
 }
 
 export default useAuth;

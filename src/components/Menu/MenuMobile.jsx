@@ -40,7 +40,7 @@ export default function MenuMobile({ filter, navigation, setImageFilter }) {
           setImageFilter={setImageFilter}
         />
       </div>
-      <ImageUpload />
+      <ImageUpload uploadNewImage={uploadNewImage} />
     </div>
   );
 }

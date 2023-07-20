@@ -6,7 +6,7 @@ import UploadForm from './UploadForm';
 
 import { uploadNewImage } from '../../features/imageSlice';
 
-export default function ImageUpload() {
+export default function ImageUpload({ uploadNewImage }) {
   const [open, setOpen] = useState(false);
   const [images, setImages] = useState([]);
   const dispatch = useDispatch();
@@ -31,7 +31,8 @@ export default function ImageUpload() {
     }
     formData.append('title', data.title);
     formData.append('type', data.type);
-    dispatch(uploadNewImage(formData));
+    uploadNewImage(formData);
+    // dispatch(uploadNewImage(formData));
     setImages([]);
   };
 

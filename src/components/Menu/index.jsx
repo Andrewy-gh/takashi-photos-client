@@ -6,7 +6,7 @@ import { filterImages } from '../../features/filterSlice';
 import { theme } from '../../styles/styles';
 import navigation from '../../data/navigation';
 
-export default function Menu() {
+export default function Menu({ uploadNewImage }) {
   const dispatch = useDispatch();
   const filter = useSelector(({ filter }) => filter);
   const isMobile = useMediaQuery(theme.breakpoints.down('tablet'));
@@ -22,12 +22,14 @@ export default function Menu() {
           filter={filter}
           navigation={navigation}
           setImageFilter={setImageFilter}
+          uploadNewImage={uploadNewImage}
         />
       ) : (
         <MenuDesktop
           filter={filter}
           navigation={navigation}
           setImageFilter={setImageFilter}
+          uploadNewImage={uploadNewImage}
         />
       )}
     </>

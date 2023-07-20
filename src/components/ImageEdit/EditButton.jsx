@@ -1,15 +1,12 @@
-import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import ButtonDialog from '../ButtonDialog';
 import EditForm from './EditForm';
 import { updateOneImage } from '../../features/imageSlice';
+import { useDialog } from '../../hooks/useDialog';
 
-export default function EditButton({ image, type }) {
+export default function EditButton({ image }) {
+  const { open, handleClose, handleOpen } = useDialog();
   const dispatch = useDispatch();
-  const [open, setOpen] = useState(false);
-
-  const handleClose = () => setOpen(false);
-  const handleOpen = () => setOpen(true);
 
   const updateImage = (newData) => dispatch(updateOneImage(image.id, newData));
 
@@ -29,7 +26,6 @@ export default function EditButton({ image, type }) {
       <EditForm
         handleClose={handleClose}
         image={image}
-        type={type}
         updateImage={updateImage}
       />
     </ButtonDialog>

@@ -108,11 +108,9 @@ export default function EditForm({ handleClose, image, updateImage }) {
       <DialogActions
         sx={{ display: 'flex', justifyContent: 'center', gap: '1.25rem' }}
       >
-        {/* Cancel  */}
         <Button variant="contained" onClick={handleClose}>
           CANCEL
         </Button>
-        {/* SUBMIT */}
         <Button variant="contained" onClick={handleSubmit}>
           Submit
         </Button>

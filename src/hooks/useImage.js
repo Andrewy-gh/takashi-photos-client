@@ -11,13 +11,28 @@ export function useImage() {
 
   useEffect(() => {
     getAllImages();
-  }, []); // This useEffect will run only once on the initial render
+  }, []);
 
-  const handleRemoveImage = async (id) => {
+  const uploadNewImage = async (content) => {
+    const newImage = await imageService.uploadNewImage(content);
+    setImages(images.concat(newImage));
+  };
+
+  const removeOneImage = async (id) => {
     await imageService.removeOneImage(id);
     const newState = images.filter((image) => image.id !== id);
     setImages(newState);
   };
 
-  return { images, handleRemoveImage };
+  const updateImageOrder = async (order) => {
+    const updatedImageOrder = await imageService.updateImageOrder(order);
+    setImages(updatedImageOrder);
+  };
+
+  return {
+    images,
+    updateImageOrder,
+    uploadNewImage,
+    removeOneImage,
+  };
 }

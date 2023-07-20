@@ -7,6 +7,13 @@ import EditButton from '../ImageEdit/EditButton';
 import DeleteButton from '../ImageDelete/DeleteButton';
 import CldThumb from '../Images/CldThumb';
 
+const flexCol = {
+  width: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  marginRight: '1rem',
+};
+
 const listItem = {
   display: 'flex',
   justifyContent: 'space-between',
@@ -42,8 +49,8 @@ const spaceBetween = {
   justifyContent: 'space-between',
 };
 
-export default function DragItem({ image, index }) {
-  const cloudName = useSelector(({ cloudName }) => cloudName);
+export default function DragItem({ children, cloudName, image, index }) {
+  // const cloudName = useSelector(({ cloudName }) => cloudName);
   return (
     <Draggable draggableId={image.id} index={index}>
       {(provided, snapshot) => (
@@ -64,22 +71,12 @@ export default function DragItem({ image, index }) {
               width: '60%',
             }}
           >
-            <div
-              style={{
-                width: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                marginRight: '1rem',
-              }}
-            >
+            <div style={flexCol}>
               <Typography variant="body2" sx={{ marginBottom: '.5rem' }}>
                 {image.title}
               </Typography>
               <div style={spaceBetween}>
-                <div>
-                  <EditButton image={image} />
-                  <DeleteButton image={image} />
-                </div>
+                <div>{children}</div>
                 <DragHandleIcon sx={{ placeSelf: 'start end' }} />
               </div>
             </div>

@@ -31,7 +31,12 @@ const typographyStyle = {
   cursor: 'pointer',
 };
 
-export default function MenuDesktop({ filter, navigation, setImageFilter }) {
+export default function MenuDesktop({
+  filter,
+  navigation,
+  setImageFilter,
+  uploadNewImage,
+}) {
   const handleClick = (filter) => {
     setImageFilter(filter);
   };
@@ -65,7 +70,7 @@ export default function MenuDesktop({ filter, navigation, setImageFilter }) {
               </Link>
             )
           )}
-          <ImageUpload />
+          <ImageUpload uploadNewImage={uploadNewImage} />
         </div>
       </div>
     </Container>

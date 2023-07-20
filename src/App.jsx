@@ -8,34 +8,37 @@ import Profile from './pages/Profile';
 import { setToken } from './services/api';
 import { getAllImages } from './features/imageSlice';
 import { getCloudName } from './features/cloudinarySlice';
-import { setCredentials } from './features/userSlice';
+// import { setCredentials } from './features/userSlice';
 import { getToken } from './services/authStorage';
 
 import { useAuth } from './hooks/useAuth';
 import { useCloudinary } from './hooks/useCloudinary';
 import { useImage } from './hooks/useImage';
+import RequireAuth from './components/RequireAuth';
 
 import { disableReactDevTools } from '@fvilers/disable-react-devtools';
 if (process.env.NODE_ENV === 'production') disableReactDevTools();
 
 export default function App() {
-  const { loggedIn, token, handleLogin, handleLogout } = useAuth();
+  const { loggedIn, token, handleLogin, handleLogout, setCredentials } =
+    useAuth();
   const { cloudName } = useCloudinary();
-  const { images, handleRemoveImage } = useImage();
+  const { images, updateImageOrder, uploadNewImage, removeOneImage } =
+    useImage();
 
   const dispatch = useDispatch();
 
   // delete
-  useEffect(() => {
-    dispatch(getCloudName());
-    dispatch(getAllImages());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getCloudName());
+  //   dispatch(getAllImages());
+  // }, [dispatch]);
 
   // delete
   useEffect(() => {
     const loggedUser = getToken();
     if (loggedUser) {
-      dispatch(setCredentials(loggedUser));
+      setCredentials(loggedUser);
       setToken(loggedUser);
     }
   }, []);
@@ -45,10 +48,14 @@ export default function App() {
       <Routes>
         <Route
           path="/*"
-          element={<Home cloudName={cloudName} images={images} />}
+          element={
+            <Home
+              cloudName={cloudName}
+              images={images}
+              uploadNewImage={uploadNewImage}
+            />
+          }
         />
-        {/* <Route path="/*" element={<Home />} /> */}
-        {/* <Route path="/edit" element={<Edit />} /> */}
         <Route
           path="/login"
           element={
@@ -59,7 +66,21 @@ export default function App() {
             />
           }
         />
-        {/* <Route path="/profile" element={<Profile />} />  */}
+        <Route element={<RequireAuth token={token} loggedIn={loggedIn} />}>
+          <Route
+            path="/edit"
+            element={
+              <Edit
+                cloudName={cloudName}
+                images={images}
+                updateImageOrder={updateImageOrder}
+              />
+            }
+          />
+        </Route>
+        {/* <Route path="/*" element={<Home />} /> */}
+        {/* <Route path="/edit" element={<Edit />} /> */}
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </BrowserRouter>
   );

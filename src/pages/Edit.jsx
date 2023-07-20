@@ -6,16 +6,18 @@ import DragDrop from '../components/DragDrop/index';
 import { updateImageOrder } from '../features/imageSlice';
 import { theme } from '../styles/styles';
 
-export default function Edit() {
-  const dispatch = useDispatch();
+import DragItem from '../components/DragDrop/DragItem';
 
-  const { data } = useSelector(({ images }) => images);
+export default function Edit({ cloudName, images, updateImageOrder }) {
+  // const dispatch = useDispatch();
 
-  const updateOrder = (images) => {
-    dispatch(updateImageOrder(images));
-  };
+  // const { data } = useSelector(({ images }) => images);
 
-  if (!data.length) return <p>Loading...</p>;
+  // const updateOrder = (images) => {
+  //   dispatch(updateImageOrder(images));
+  // };
+
+  if (!images.length) return <p>Loading...</p>;
 
   return (
     <>
@@ -27,7 +29,11 @@ export default function Edit() {
           />
         </IconButton>
       </Link>
-      <DragDrop images={data} updateOrder={updateOrder} />
+      <DragDrop
+        cloudName={cloudName}
+        images={images}
+        updateImageOrder={updateImageOrder}
+      />
     </>
   );
 }
