@@ -20,15 +20,12 @@ const logoStyle = {
     'linear-gradient(90deg, rgba(104,94,80,1) 0%, rgba(149,129,111,1) 35%, rgba(179,153,132,1) 100%)',
 };
 
-export default function MenuMobile({ filter, navigation, setImageFilter }) {
-  const handleClick = (filter) => {
-    setImageFilter(filter);
-  };
+export default function MenuMobile({ filter, navigation, handleFilterChange }) {
   return (
     <div style={{ paddingInline: '.5rem' }}>
       <div style={flex}>
         <Link to="/">
-          <div onClick={() => handleClick(null)}>
+          <div onClick={() => handleFilterChange(null)}>
             <Typography as="h1" sx={logoStyle}>
               TAKASHI MIYAZAKI
             </Typography>
@@ -37,7 +34,7 @@ export default function MenuMobile({ filter, navigation, setImageFilter }) {
         <DrawerMenu
           navigation={navigation}
           filter={filter}
-          setImageFilter={setImageFilter}
+          handleFilterChange={handleFilterChange}
         />
       </div>
       <ImageUpload uploadNewImage={uploadNewImage} />

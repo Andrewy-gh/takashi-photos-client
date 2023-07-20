@@ -36,15 +36,16 @@ export default function MenuDesktop({
   navigation,
   setImageFilter,
   uploadNewImage,
+  handleFilterChange,
 }) {
-  const handleClick = (filter) => {
-    setImageFilter(filter);
-  };
   return (
     <Container sx={sticky}>
       <div style={{ ...flexColumns, padding: theme.spacing(6) }}>
         <Link to="/">
-          <div style={{ minWidth: 200 }} onClick={() => handleClick(null)}>
+          <div
+            style={{ minWidth: 200 }}
+            onClick={() => handleFilterChange(null)}
+          >
             <img src={Default} alt="logo" />
           </div>
         </Link>
@@ -58,7 +59,7 @@ export default function MenuDesktop({
                   ...typographyStyle,
                   ...(filter === nav.filter ? activeStyle : inActiveStyle),
                 }}
-                onClick={() => handleClick(nav.filter)}
+                onClick={() => handleFilterChange(nav.filter)}
               >
                 {nav.name}
               </Typography>

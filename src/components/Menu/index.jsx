@@ -4,15 +4,25 @@ import MenuMobile from './MenuMobile';
 import { theme } from '../../styles/styles';
 import { navigation } from '../../data/index';
 
-export default function Menu({ uploadNewImage }) {
+export default function Menu({ filter, handleFilterChange, uploadNewImage }) {
   const isMobile = useMediaQuery(theme.breakpoints.down('tablet'));
 
   return (
     <>
       {isMobile ? (
-        <MenuMobile navigation={navigation} uploadNewImage={uploadNewImage} />
+        <MenuMobile
+          filter={filter}
+          navigation={navigation}
+          uploadNewImage={uploadNewImage}
+          handleFilterChange={handleFilterChange}
+        />
       ) : (
-        <MenuDesktop navigation={navigation} uploadNewImage={uploadNewImage} />
+        <MenuDesktop
+          filter={filter}
+          navigation={navigation}
+          uploadNewImage={uploadNewImage}
+          handleFilterChange={handleFilterChange}
+        />
       )}
     </>
   );

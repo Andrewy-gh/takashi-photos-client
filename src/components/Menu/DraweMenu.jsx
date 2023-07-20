@@ -28,12 +28,9 @@ const buttonStyle = {
     'linear-gradient(90deg, rgba(104,94,80,1) 0%, rgba(149,129,111,1) 35%, rgba(179,153,132,1) 100%)',
 };
 
-export default function DraweMenu({ filter, navigation, setImageFilter }) {
+export default function DraweMenu({ filter, navigation, handleFilterChange }) {
   const [open, setOpen] = useState(false);
 
-  const handleClick = (filter) => {
-    setImageFilter(filter);
-  };
   const getList = () => (
     <Box sx={menuStyle} onClick={() => setOpen(false)}>
       {navigation.map((nav) =>
@@ -41,7 +38,7 @@ export default function DraweMenu({ filter, navigation, setImageFilter }) {
           <ListItem
             key={nav.id}
             sx={{ cursor: 'pointer' }}
-            onClick={() => handleClick(nav.filter)}
+            onClick={() => handleFilterChange(nav.filter)}
           >
             <ListItemText
               primary={nav.name}
