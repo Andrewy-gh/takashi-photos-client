@@ -1,10 +1,7 @@
-import { useSelector } from 'react-redux';
 import { Draggable } from 'react-beautiful-dnd';
 import DragHandleIcon from '@mui/icons-material/DragHandle';
 import ListItem from '@mui/material/ListItem';
 import Typography from '@mui/material/Typography';
-import EditButton from '../ImageEdit/EditButton';
-import DeleteButton from '../ImageDelete/DeleteButton';
 import CldThumb from '../Images/CldThumb';
 
 const flexCol = {
@@ -24,25 +21,6 @@ const listItem = {
   cursor: 'grab',
 };
 
-const thumbImgContainer = {
-  overflow: 'hidden',
-  flexShrink: '0',
-  width: '2em',
-  height: '2em',
-  backgroundColor: '#e8e8e8',
-  padding: '.5em',
-  marginRight: '.5em',
-};
-
-const thumbImg = {
-  display: 'block',
-  width: '100%',
-  height: 'auto',
-};
-const mobileWidth = {
-  width: 'calc(100% - 2rem)',
-};
-
 const spaceBetween = {
   display: 'flex',
   alignItems: 'center',
@@ -52,7 +30,7 @@ const spaceBetween = {
 export default function DragItem({ children, cloudName, image, index }) {
   // const cloudName = useSelector(({ cloudName }) => cloudName);
   return (
-    <Draggable draggableId={image.id} index={index}>
+    <Draggable key={image.id} draggableId={image.id} index={index}>
       {(provided, snapshot) => (
         <ListItem
           {...provided.draggableProps}

@@ -1,5 +1,4 @@
 import Masonry from '@mui/lab/Masonry';
-import { useSelector } from 'react-redux';
 import CldImage from './CldImage';
 
 export default function Images({ cloudName, images }) {

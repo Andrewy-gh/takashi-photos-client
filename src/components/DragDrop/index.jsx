@@ -1,19 +1,15 @@
 import { DragDropContext } from 'react-beautiful-dnd';
 import List from '@mui/material/List';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DragItem from './DragItem';
 import StrictModeDroppable from './StrictModeDroppable';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { theme } from '../../styles/styles';
 
-import { useDialog } from '../../hooks/useDialog';
 import EditButton from '../ImageEdit/EditButton';
 import DeleteButton from '../ImageDelete/DeleteButton';
 
-import EditForm from '../ImageEdit/EditForm';
-
 const containerStyle = {
-  // textAlign: 'center'
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
@@ -30,18 +26,44 @@ const mobileWidth = {
   width: 'calc(100% - 2rem)',
 };
 
-export default function DragDrop({ cloudName, images, updateImageOrder }) {
+export default function DragDrop({
+  cloudName,
+  images,
+  updateImageOrder,
+  updateImageDetails,
+  removeOneImage,
+}) {
   const [imageOrder, setImageOrder] = useState(images);
   const isMobile = useMediaQuery(theme.breakpoints.down('tablet'));
 
-  function handleOnDragEnd(result) {
+  // const hasImagesChanged = images !== imageOrder;
+
+  // if (hasImagesChanged) {
+  //   setImageOrder(images);
+  // }
+
+  useEffect(() => {
+    setImageOrder(images);
+  }, [images]);
+
+  // const handleImageOrderUpdate = (id, newData) => {
+  //   console.log(id, newData);
+  //   const updatedImageDetails = imageOrder.map((image) =>
+  //     image.id === id ? newData : image
+  //   );
+  //   updateImageDetails(id, newData);
+  //   setImageOrder(updatedImageDetails);
+  // };
+
+  const handleOnDragEnd = (result) => {
     if (!result.destination) return;
     const images = Array.from(imageOrder);
     const [reorderedImages] = images.splice(result.source.index, 1);
     images.splice(result.destination.index, 0, reorderedImages);
     updateImageOrder(images);
     setImageOrder(images);
-  }
+  };
+
   return (
     <div style={containerStyle}>
       <DragDropContext onDragEnd={handleOnDragEnd}>
@@ -60,8 +82,14 @@ export default function DragDrop({ cloudName, images, updateImageOrder }) {
                     image={image}
                     index={index}
                   >
-                    <EditButton image={image} />
-                    <DeleteButton image={image} />
+                    <EditButton
+                      image={image}
+                      updateImageDetails={updateImageDetails}
+                    />
+                    <DeleteButton
+                      image={image}
+                      removeOneImage={removeOneImage}
+                    />
                   </DragItem>
                 );
               })}

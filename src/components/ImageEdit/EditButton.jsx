@@ -1,14 +1,11 @@
-import { useDispatch } from 'react-redux';
 import ButtonDialog from '../ButtonDialog';
 import EditForm from './EditForm';
-import { updateOneImage } from '../../features/imageSlice';
 import { useDialog } from '../../hooks/useDialog';
 
-export default function EditButton({ image }) {
+export default function EditButton({ image, updateImageDetails }) {
   const { open, handleClose, handleOpen } = useDialog();
-  const dispatch = useDispatch();
 
-  const updateImage = (newData) => dispatch(updateOneImage(image.id, newData));
+  const updateImage = (newData) => updateImageDetails(image.id, newData);
 
   const buttonStyle = {
     WebkitBackgroundClip: 'text',

@@ -1,13 +1,11 @@
-import { useDispatch } from 'react-redux';
 import ButtonDialog from '../ButtonDialog';
 import DeleteDialog from './DeleteDialog';
-import { removeOneImage } from '../../features/imageSlice';
 import { useDialog } from '../../hooks/useDialog';
-export default function DeleteButton({ image }) {
-  const dispatch = useDispatch();
+
+export default function DeleteButton({ image, removeOneImage }) {
   const { open, handleClose, handleOpen } = useDialog();
 
-  const removeImage = () => dispatch(removeOneImage(image.id));
+  const removeImage = () => removeOneImage(image.id);
 
   const buttonStyle = {
     WebkitBackgroundClip: 'text',

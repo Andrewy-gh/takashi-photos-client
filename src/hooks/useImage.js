@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import imageService from '../services/image';
+import imageServices from '../services/image';
 
 export function useImage() {
   const [images, setImages] = useState([]);
 
   const getAllImages = async () => {
-    const initialImages = await imageService.getAllImages();
+    const initialImages = await imageServices.getAllImages();
     setImages(initialImages);
   };
 
@@ -14,25 +14,35 @@ export function useImage() {
   }, []);
 
   const uploadNewImage = async (content) => {
-    const newImage = await imageService.uploadNewImage(content);
+    const newImage = await imageServices.uploadNewImage(content);
     setImages(images.concat(newImage));
   };
 
+  const updateImageDetails = async (id, content) => {
+    const updatedImage = await imageServices.updateImageDetails(id, content);
+    // console.log(updatedImage);
+    const newImages = images.map((image) =>
+      image.id === id ? updatedImage : image
+    );
+    setImages(newImages);
+  };
+
   const removeOneImage = async (id) => {
-    await imageService.removeOneImage(id);
+    await imageServices.removeOneImage(id);
     const newState = images.filter((image) => image.id !== id);
     setImages(newState);
   };
 
   const updateImageOrder = async (order) => {
-    const updatedImageOrder = await imageService.updateImageOrder(order);
+    const updatedImageOrder = await imageServices.updateImageOrder(order);
     setImages(updatedImageOrder);
   };
 
   return {
     images,
-    updateImageOrder,
     uploadNewImage,
+    updateImageOrder,
+    updateImageDetails,
     removeOneImage,
   };
 }

@@ -1,4 +1,4 @@
-const navigation = [
+export const navigation = [
   { id: 1, name: 'Nature', type: 'filter', filter: 'nature' },
   { id: 2, name: 'Cityscapes', type: 'filter', filter: 'cityscapes' },
   { id: 3, name: 'Extras', type: 'filter', filter: 'extras' },
@@ -7,4 +7,8 @@ const navigation = [
   { id: 6, name: 'Login', type: 'link', path: '/login' },
 ];
 
-export default navigation;
+export const types = [
+  { id: 1, name: 'Nature' },
+  { id: 2, name: 'Cityscapes' },
+  { id: 3, name: 'Extras' },
+];

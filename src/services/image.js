@@ -5,18 +5,18 @@ const getAllImages = async () => {
   return response.data;
 };
 
-const updateImageOrder = async (order) => {
-  const response = await api.put('/api/images', order);
-  return response.data;
-};
-
 const uploadNewImage = async (content) => {
   const response = await api.post('/api/images', content);
   return response.data;
 };
 
-const updateOneImage = async (id, newObject) => {
+const updateImageDetails = async (id, newObject) => {
   const response = await api.put(`/api/images/${id}`, newObject);
+  return response.data;
+};
+
+const updateImageOrder = async (order) => {
+  const response = await api.put('/api/images', order);
   return response.data;
 };
 
@@ -28,7 +28,7 @@ const removeOneImage = async (id) => {
 export default {
   getAllImages,
   uploadNewImage,
-  updateOneImage,
   updateImageOrder,
+  updateImageDetails,
   removeOneImage,
 };

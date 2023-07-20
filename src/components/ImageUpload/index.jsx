@@ -1,15 +1,11 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import ButtonDialog from '../ButtonDialog';
 import Preview from './Preview';
 import UploadForm from './UploadForm';
 
-import { uploadNewImage } from '../../features/imageSlice';
-
 export default function ImageUpload({ uploadNewImage }) {
   const [open, setOpen] = useState(false);
   const [images, setImages] = useState([]);
-  const dispatch = useDispatch();
 
   const clearImages = () => {
     setImages([]);
@@ -32,7 +28,6 @@ export default function ImageUpload({ uploadNewImage }) {
     formData.append('title', data.title);
     formData.append('type', data.type);
     uploadNewImage(formData);
-    // dispatch(uploadNewImage(formData));
     setImages([]);
   };
 
