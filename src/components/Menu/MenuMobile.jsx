@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import ImageUpload from '../ImageUpload';
-import DrawerMenu from './DraweMenu';
+import DrawerMenu from './DrawerMenu';
 import { Typography } from '@mui/material';
 
 const flex = {
@@ -26,7 +26,7 @@ export default function MenuMobile({
   handleLogout,
   loggedIn,
   navigation,
-  uploadNewImage,
+  token,
 }) {
   return (
     <div style={{ paddingInline: '.5rem' }}>
@@ -44,9 +44,9 @@ export default function MenuMobile({
           handleFilterChange={handleFilterChange}
           handleLogout={handleLogout}
           loggedIn={loggedIn}
+          token={token}
         />
       </div>
-      <ImageUpload uploadNewImage={uploadNewImage} />
     </div>
   );
 }

@@ -4,7 +4,6 @@ export const navigation = [
   { id: 3, name: 'Extras', type: 'filter', filter: 'extras' },
   { id: 4, name: 'Profile', type: 'link', path: '/profile' },
   { id: 5, name: 'Edit', type: 'link', path: '/edit' },
-  { id: 6, name: 'Login', type: 'link', path: '/login' },
 ];
 
 export const types = [

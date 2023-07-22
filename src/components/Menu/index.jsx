@@ -9,7 +9,7 @@ export default function Menu({
   handleFilterChange,
   handleLogout,
   loggedIn,
-  uploadNewImage,
+  token,
 }) {
   const isMobile = useMediaQuery(theme.breakpoints.down('tablet'));
 
@@ -22,7 +22,7 @@ export default function Menu({
           handleLogout={handleLogout}
           loggedIn={loggedIn}
           navigation={navigation}
-          uploadNewImage={uploadNewImage}
+          token={token}
         />
       ) : (
         <MenuDesktop
@@ -31,7 +31,7 @@ export default function Menu({
           handleLogout={handleLogout}
           loggedIn={loggedIn}
           navigation={navigation}
-          uploadNewImage={uploadNewImage}
+          token={token}
         />
       )}
     </>

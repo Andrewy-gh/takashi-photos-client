@@ -18,7 +18,7 @@ const containerStyle = {
 };
 
 const listStyle = {
-  width: 'min(40ch, 100% - 2rem)',
+  width: 'min(60ch, 100% - 2rem)',
   marginInline: 'auto',
 };
 
@@ -36,24 +36,9 @@ export default function DragDrop({
   const [imageOrder, setImageOrder] = useState(images);
   const isMobile = useMediaQuery(theme.breakpoints.down('tablet'));
 
-  // const hasImagesChanged = images !== imageOrder;
-
-  // if (hasImagesChanged) {
-  //   setImageOrder(images);
-  // }
-
   useEffect(() => {
     setImageOrder(images);
   }, [images]);
-
-  // const handleImageOrderUpdate = (id, newData) => {
-  //   console.log(id, newData);
-  //   const updatedImageDetails = imageOrder.map((image) =>
-  //     image.id === id ? newData : image
-  //   );
-  //   updateImageDetails(id, newData);
-  //   setImageOrder(updatedImageDetails);
-  // };
 
   const handleOnDragEnd = (result) => {
     if (!result.destination) return;

@@ -46,7 +46,7 @@ export default function App() {
               images={images}
               loggedIn={loggedIn}
               handleLogout={handleLogout}
-              uploadNewImage={uploadNewImage}
+              token={token}
             />
           }
         />
@@ -69,12 +69,16 @@ export default function App() {
                 images={images}
                 updateImageOrder={updateImageOrder}
                 updateImageDetails={updateImageDetails}
+                uploadNewImage={uploadNewImage}
                 removeOneImage={removeOneImage}
               />
             }
           />
         </Route>
-        <Route path="/profile" element={<Profile />} />
+        <Route
+          path="/profile"
+          element={<Profile loggedIn={loggedIn} token={token} />}
+        />
       </Routes>
     </BrowserRouter>
   );

@@ -9,7 +9,6 @@ export default function RequireAuth({ token, loggedIn }) {
       ) : (
         <Navigate to="/login" state={{ from: location }} replace />
       )}
-      ;
     </>
   );
 }

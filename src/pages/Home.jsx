@@ -8,7 +8,7 @@ export default function Home({
   handleLogout,
   images,
   loggedIn,
-  uploadNewImage,
+  token,
 }) {
   const { filter, handleFilterChange } = useFilter();
   const filteredImages =
@@ -26,7 +26,7 @@ export default function Home({
             handleFilterChange={handleFilterChange}
             handleLogout={handleLogout}
             loggedIn={loggedIn}
-            uploadNewImage={uploadNewImage}
+            token={token}
           />
         </Grid>
         <Grid item mobile={12} tablet={9} sx={{ tablet: { padding: '.5em' } }}>

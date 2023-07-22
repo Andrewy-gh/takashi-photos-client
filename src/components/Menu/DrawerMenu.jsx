@@ -5,6 +5,7 @@ import ButtonBase from '@mui/material/ButtonBase';
 import Drawer from '@mui/material/Drawer';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
+import { renderLink } from '../../utils/navigation';
 import { theme } from '../../styles/styles';
 
 const activeStyle = {
@@ -28,12 +29,13 @@ const buttonStyle = {
     'linear-gradient(90deg, rgba(104,94,80,1) 0%, rgba(149,129,111,1) 35%, rgba(179,153,132,1) 100%)',
 };
 
-export default function DraweMenu({
+export default function DrawerMenu({
   filter,
   handleFilterChange,
   loggedIn,
   handleLogout,
   navigation,
+  token,
 }) {
   const [open, setOpen] = useState(false);
 
@@ -52,7 +54,7 @@ export default function DraweMenu({
               sx={filter === nav.filter ? activeStyle : inActiveStyle}
             />
           </ListItem>
-        ) : (
+        ) : renderLink(nav, loggedIn, token) ? (
           <ListItem key={nav.id}>
             <Link to={nav.path}>
               <ListItemText
@@ -61,15 +63,17 @@ export default function DraweMenu({
               />
             </Link>
           </ListItem>
-        )
+        ) : null
       )}
-      {loggedIn && (
-        <ListItem onClick={handleLogout} style={{ cursor: 'pointer' }}>
-          <ListItemText
-            primary={'Logout'}
-            primaryTypographyProps={{ variant: 'h3' }}
-          />
-        </ListItem>
+      {loggedIn && token && (
+        <>
+          <ListItem onClick={handleLogout} style={{ cursor: 'pointer' }}>
+            <ListItemText
+              primary={'Logout'}
+              primaryTypographyProps={{ variant: 'h3' }}
+            />
+          </ListItem>
+        </>
       )}
     </Box>
   );

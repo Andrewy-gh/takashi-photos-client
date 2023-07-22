@@ -3,6 +3,7 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import ImageUpload from '../ImageUpload';
 import Default from '../../assets/default.avif';
+import { renderLink } from '../../utils/navigation';
 import { theme } from '../../styles/styles';
 
 const activeStyle = {
@@ -37,7 +38,7 @@ export default function MenuDesktop({
   handleLogout,
   loggedIn,
   navigation,
-  uploadNewImage,
+  token,
 }) {
   return (
     <Container sx={sticky}>
@@ -64,15 +65,15 @@ export default function MenuDesktop({
               >
                 {nav.name}
               </Typography>
-            ) : (
+            ) : renderLink(nav, loggedIn, token) ? (
               <Link to={nav.path} key={nav.id}>
                 <Typography variant="h6" sx={typographyStyle}>
                   {nav.name}
                 </Typography>
               </Link>
-            )
+            ) : null
           )}
-          {loggedIn && (
+          {loggedIn && token && (
             <Typography
               variant="h6"
               sx={typographyStyle}
@@ -81,7 +82,6 @@ export default function MenuDesktop({
               Logout
             </Typography>
           )}
-          <ImageUpload uploadNewImage={uploadNewImage} />
         </div>
       </div>
     </Container>

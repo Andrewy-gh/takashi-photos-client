@@ -5,6 +5,11 @@ import { theme } from '../styles/styles';
 import Typography from '@mui/material/Typography';
 import ProfileCover from '../assets/profile-cover.avif';
 
+const BodyStyle = {
+  fontFamily: 'Judson',
+  lineHeight: '1.6',
+};
+
 const HeaderStyle = {
   lineHeight: '1.6',
   fontFamily: 'Quando',
@@ -12,12 +17,13 @@ const HeaderStyle = {
   marginBottom: '.25rem',
 };
 
-const BodyStyle = {
-  fontFamily: 'Judson',
+const typographyStyle = {
   lineHeight: '1.6',
+  fontFamily: 'Quando',
+  cursor: 'pointer',
 };
 
-export default function Profile() {
+export default function Profile({ loggedIn, token }) {
   return (
     <div
       style={{
@@ -75,13 +81,20 @@ export default function Profile() {
         </Typography>
       </div>
       <div style={{ flexGrow: 1 }}></div>
-      {/* Spacing */}
-      <div
-        style={{
-          placeSelf: 'center end',
-          padding: '2rem',
-        }}
-      ></div>
+      {loggedIn && token ? null : (
+        <div
+          style={{
+            placeSelf: 'center end',
+            padding: '2rem',
+          }}
+        >
+          <Link to="/login">
+            <Typography variant="body1" sx={typographyStyle}>
+              Login
+            </Typography>
+          </Link>
+        </div>
+      )}
     </div>
   );
 }

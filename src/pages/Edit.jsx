@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
+import Box from '@mui/material/Box';
 import HomeIcon from '@mui/icons-material/Home';
 import IconButton from '@mui/material/IconButton';
 import DragDrop from '../components/DragDrop/index';
 import { theme } from '../styles/styles';
+import ImageUpload from '../components/ImageUpload';
 
 export default function Edit({
   cloudName,
@@ -10,19 +12,32 @@ export default function Edit({
   updateImageOrder,
   updateImageDetails,
   removeOneImage,
+  uploadNewImage,
 }) {
   if (!images.length) return <p>Loading...</p>;
 
   return (
     <>
-      <Link to="/">
-        <IconButton style={{ placeSelf: 'start start' }}>
-          <HomeIcon
-            fontSize="large"
-            sx={{ color: theme.palette.custom.light }}
-          />
-        </IconButton>
-      </Link>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          padding: { mobile: '.75rem .5rem', laptop: '1rem' },
+        }}
+      >
+        <Link to="/">
+          <IconButton style={{ placeSelf: 'start start' }}>
+            <HomeIcon
+              fontSize="large"
+              sx={{ color: theme.palette.custom.light }}
+            />
+          </IconButton>
+        </Link>
+        <ImageUpload
+          style={{ placeSelf: 'start end' }}
+          uploadNewImage={uploadNewImage}
+        />
+      </Box>
       <DragDrop
         cloudName={cloudName}
         images={images}
