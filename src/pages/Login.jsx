@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import IconButton from '@mui/material/IconButton';
@@ -8,9 +7,16 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { theme } from '../styles/styles';
 import ProfileCover from '../assets/profile-cover.png';
-import { loginUser } from '../features/userSlice';
-import { saveToken } from '../services/authStorage';
+// import { saveToken } from '../services/authStorage';
+import { saveToken } from '../utils/authStorage';
 import { setToken } from '../services/api';
+
+const flex = {
+  display: 'flex',
+  flexDirection: 'column',
+  marginInline: 'auto',
+  height: '100vh',
+};
 
 // focused outline color styles
 const fieldStyle = {
@@ -25,35 +31,39 @@ const fieldStyle = {
   },
 };
 
-export default function Login() {
-  const dispatch = useDispatch();
+const formStyle = {
+  placeSelf: 'center center',
+  width: 'min(80ch, 100% - 2rem)',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  flexDirection: 'column',
+  gap: '10px',
+  mt: '8px',
+  padding: 2,
+};
+
+export default function Login({ loggedIn, token, handleLogin }) {
   const navigate = useNavigate();
-  const user = useSelector(({ user }) => user);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   useEffect(() => {
-    if (user.loggedIn && user.token) {
-      saveToken(user.token);
-      setToken(user.token);
+    if (loggedIn && token) {
+      console.log('user status: ', loggedIn, token);
+      saveToken(token);
+      setToken(token);
       navigate('/');
     }
-  }, [user]);
+  }, [loggedIn, token]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(loginUser({ email, password }));
+    handleLogin({ email, password });
   };
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        marginInline: 'auto',
-        height: '100vh',
-      }}
-    >
+    <div style={flex}>
       <Link to="/">
         <IconButton style={{ placeSelf: 'start start' }}>
           <HomeIcon
@@ -65,19 +75,7 @@ export default function Login() {
       <div style={{ maxWidth: 750, placeSelf: 'center center' }}>
         <img src={ProfileCover} alt="logo" />
       </div>
-      <div
-        style={{
-          placeSelf: 'center center',
-          width: 'min(80ch, 100% - 2rem)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexDirection: 'column',
-          gap: '10px',
-          mt: '8px',
-          padding: 2,
-        }}
-      >
+      <div style={formStyle}>
         <Typography component="h1" variant="h5" sx={{ mb: 2 }}>
           Log In
         </Typography>

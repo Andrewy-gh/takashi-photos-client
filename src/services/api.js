@@ -12,7 +12,7 @@ const api = axios.create({
 let token = null;
 
 export const setToken = (newToken) => {
-  token = `bearer ${newToken}`;
+  token = `Bearer ${newToken}`;
 };
 
 api.interceptors.request.use(

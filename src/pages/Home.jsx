@@ -1,8 +1,18 @@
 import Grid from '@mui/material/Grid';
 import Menu from '../components/Menu';
 import Images from '../components/Images/index';
+import { useFilter } from '../hooks/useFilter';
 
-export default function Home() {
+export default function Home({
+  cloudName,
+  handleLogout,
+  images,
+  loggedIn,
+  token,
+}) {
+  const { filter, handleFilterChange } = useFilter();
+  const filteredImages =
+    filter === null ? images : images.filter((image) => image.type === filter);
   return (
     <>
       <Grid
@@ -12,11 +22,15 @@ export default function Home() {
       >
         <Grid item mobile={12} tablet={3}>
           <Menu
-          // user={user}
+            filter={filter}
+            handleFilterChange={handleFilterChange}
+            handleLogout={handleLogout}
+            loggedIn={loggedIn}
+            token={token}
           />
         </Grid>
         <Grid item mobile={12} tablet={9} sx={{ tablet: { padding: '.5em' } }}>
-          <Images />
+          <Images cloudName={cloudName} images={filteredImages} />
         </Grid>
       </Grid>
       {/* TODO: Snackbar lift to App component */}
