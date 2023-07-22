@@ -6,8 +6,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { theme } from '../styles/styles';
-import ProfileCover from '../assets/profile-cover.png';
-// import { saveToken } from '../services/authStorage';
+import ProfileCover from '../assets/profile-cover.avif';
 import { saveToken } from '../utils/authStorage';
 import { setToken } from '../services/api';
 
@@ -50,7 +49,6 @@ export default function Login({ loggedIn, token, handleLogin }) {
 
   useEffect(() => {
     if (loggedIn && token) {
-      console.log('user status: ', loggedIn, token);
       saveToken(token);
       setToken(token);
       navigate('/');

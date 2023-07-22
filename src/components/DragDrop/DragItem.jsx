@@ -29,7 +29,6 @@ const spaceBetween = {
 };
 
 export default function DragItem({ children, cloudName, image, index }) {
-  // const cloudName = useSelector(({ cloudName }) => cloudName);
   return (
     <Draggable key={image.id} draggableId={image.id} index={index}>
       {(provided, snapshot) => (

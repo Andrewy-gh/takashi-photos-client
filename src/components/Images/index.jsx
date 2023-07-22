@@ -2,12 +2,6 @@ import Masonry from '@mui/lab/Masonry';
 import CldImage from './CldImage';
 
 export default function Images({ cloudName, images }) {
-  // const { data } = useSelector(({ images }) => images);
-  // const filter = useSelector(({ filter }) => filter);
-  // const cloudName = useSelector(({ cloudName }) => cloudName);
-  // const images =
-  //   filter === null ? data : data.filter((image) => image.type === filter);
-
   return (
     <Masonry
       variant="masonry"

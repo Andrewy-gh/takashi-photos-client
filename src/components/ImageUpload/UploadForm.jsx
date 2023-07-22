@@ -1,8 +1,5 @@
-// import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-// import { useDispatch } from 'react-redux';
-// import { useTheme } from '@mui/material/styles';
 
 import Button from '@mui/material/Button';
 import DialogActions from '@mui/material/DialogActions';
@@ -18,11 +15,7 @@ import Toolbar from '@mui/material/Toolbar';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 import CloseIcon from '@mui/icons-material/Close';
-
-// import Preview from './Preview';
-// import { createPost } from '../reducers/postReducer';
-// import { logout } from '../reducers/userReducer';
-
+import { types } from '../../data';
 import { theme } from '../../styles/styles';
 
 const fieldSpacing = {
@@ -84,11 +77,6 @@ export default function UploadForm({
   }, [formState, reset]);
 
   const isMobile = useMediaQuery(theme.breakpoints.down('tablet'));
-  const types = [
-    { id: 1, name: 'Nature' },
-    { id: 2, name: 'Cityscapes' },
-    { id: 3, name: 'Extras' },
-  ];
 
   const onSubmit = (data) => {
     submitImageData(data);

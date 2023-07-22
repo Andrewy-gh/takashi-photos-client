@@ -20,7 +20,6 @@ export function useImage() {
 
   const updateImageDetails = async (id, content) => {
     const updatedImage = await imageServices.updateImageDetails(id, content);
-    // console.log(updatedImage);
     const newImages = images.map((image) =>
       image.id === id ? updatedImage : image
     );

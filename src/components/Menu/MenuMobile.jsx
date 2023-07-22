@@ -9,7 +9,7 @@ const flex = {
   justifyContent: 'space-between',
   paddingInline: 3,
   margin: '.25rem',
-  // paddingTop: '.625rem',
+  paddingTop: '.625rem',
 };
 
 const logoStyle = {
