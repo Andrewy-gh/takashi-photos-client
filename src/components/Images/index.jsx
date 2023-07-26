@@ -6,8 +6,11 @@ export default function Images({ cloudName, images }) {
     <Masonry
       variant="masonry"
       columns={{ mobile: 1, tablet: 1, laptop: 2, desktop: 3 }}
-      spacing={1}
-      sx={{ marginInline: 'auto', paddingInline: { laptop: 2 } }}
+      spacing={2}
+      sx={{
+        marginInline: 'auto',
+        paddingInline: { mobile: 1, tablet: 1, laptop: 2 },
+      }}
     >
       {images.map((image) => (
         <div key={image.id}>
