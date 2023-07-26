@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-import ImageUpload from '../ImageUpload';
 import Default from '../../assets/default.avif';
 import { renderLink } from '../../utils/navigation';
 import { theme } from '../../styles/styles';

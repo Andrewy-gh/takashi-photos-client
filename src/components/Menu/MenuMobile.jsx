@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import ImageUpload from '../ImageUpload';
 import DrawerMenu from './DrawerMenu';
 import { Typography } from '@mui/material';
 
