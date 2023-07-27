@@ -53,8 +53,8 @@ export default function Profile({ loggedIn, token }) {
         <Typography variant="body1" sx={BodyStyle}>
           My name is Takashi Miyazaki. I&apos;m a university student in Tokyo,
           studying language and international relations. I been in photography
-          for 5 years and has published his work on various platforms. I usually
-          shoots nature. I aim to create colors and images that are not
+          for 5 years and published work on various platforms. I usually shoot
+          nature. My aim to create colors and images that are not
           over-processed, just memories and colors that make you remember the
           scene when you look at it.
         </Typography>

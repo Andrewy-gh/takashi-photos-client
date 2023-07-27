@@ -50,7 +50,7 @@ export default function DrawerMenu({
           >
             <ListItemText
               primary={nav.name}
-              primaryTypographyProps={{ variant: 'h3' }}
+              primaryTypographyProps={{ variant: 'h4' }}
               sx={filter === nav.filter ? activeStyle : inActiveStyle}
             />
           </ListItem>
@@ -59,7 +59,7 @@ export default function DrawerMenu({
             <Link to={nav.path}>
               <ListItemText
                 primary={nav.name}
-                primaryTypographyProps={{ variant: 'h3' }}
+                primaryTypographyProps={{ variant: 'h4' }}
               />
             </Link>
           </ListItem>
@@ -70,7 +70,7 @@ export default function DrawerMenu({
           <ListItem onClick={handleLogout} style={{ cursor: 'pointer' }}>
             <ListItemText
               primary={'Logout'}
-              primaryTypographyProps={{ variant: 'h3' }}
+              primaryTypographyProps={{ variant: 'h4' }}
             />
           </ListItem>
         </>
