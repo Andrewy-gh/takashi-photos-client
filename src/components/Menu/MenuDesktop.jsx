@@ -1,6 +1,4 @@
 import { Link } from 'react-router-dom';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
 import Default from '../../assets/default.avif';
 import { renderLink } from '../../utils/navigation';
 import { theme } from '../../styles/styles';
@@ -25,6 +23,8 @@ const sticky = {
 };
 
 const typographyStyle = {
+  fontSize: 'clamp(1.00rem, calc(0.85rem + 0.30vw), 1.25rem)',
+  fontWeight: '300',
   lineHeight: '1.6',
   fontFamily: 'Quando',
   marginBottom: theme.spacing(1),
@@ -40,49 +40,41 @@ export default function MenuDesktop({
   token,
 }) {
   return (
-    <Container sx={sticky}>
+    <div style={sticky}>
       <div style={{ ...flexColumns, padding: theme.spacing(6) }}>
-        <Link to="/">
-          <div
-            style={{ minWidth: 200 }}
-            onClick={() => handleFilterChange(null)}
-          >
+        <div style={{ minWidth: 200 }} onClick={() => handleFilterChange(null)}>
+          <Link to="/">
             <img src={Default} alt="logo" />
-          </div>
-        </Link>
-        <div style={flexColumns}>
+          </Link>
+        </div>
+        <ul style={flexColumns}>
           {navigation.map((nav) =>
             nav.type === 'filter' ? (
-              <Typography
+              <li
                 key={nav.id}
-                variant="h6"
-                sx={{
+                style={{
                   ...typographyStyle,
                   ...(filter === nav.filter ? activeStyle : inActiveStyle),
                 }}
                 onClick={() => handleFilterChange(nav.filter)}
               >
                 {nav.name}
-              </Typography>
+              </li>
             ) : renderLink(nav, loggedIn, token) ? (
-              <Link to={nav.path} key={nav.id}>
-                <Typography variant="h6" sx={typographyStyle}>
+              <li style={typographyStyle}>
+                <Link to={nav.path} key={nav.id}>
                   {nav.name}
-                </Typography>
-              </Link>
+                </Link>
+              </li>
             ) : null
           )}
           {loggedIn && token && (
-            <Typography
-              variant="h6"
-              sx={typographyStyle}
-              onClick={handleLogout}
-            >
+            <li style={typographyStyle} onClick={handleLogout}>
               Logout
-            </Typography>
+            </li>
           )}
-        </div>
+        </ul>
       </div>
-    </Container>
+    </div>
   );
 }

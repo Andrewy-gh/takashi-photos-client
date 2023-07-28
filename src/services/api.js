@@ -1,8 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:3001',
-  // baseURL: 'https://takashi-photos.fly.dev',
+  baseURL: 'https://takashi-photos.fly.dev',
   withCredentials: true,
 });
 

@@ -4,7 +4,6 @@ import HomeIcon from '@mui/icons-material/Home';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
 import { theme } from '../styles/styles';
 import ProfileCover from '../assets/profile-cover.avif';
 import { saveToken } from '../utils/authStorage';
@@ -74,9 +73,7 @@ export default function Login({ loggedIn, token, handleLogin }) {
         <img src={ProfileCover} alt="logo" />
       </div>
       <div style={formStyle}>
-        <Typography component="h1" variant="h5" sx={{ mb: 2 }}>
-          Log In
-        </Typography>
+        <h1 style={{ marginBottom: '1rem' }}>Log In</h1>
         <form onSubmit={handleSubmit}>
           <TextField
             label="Email"

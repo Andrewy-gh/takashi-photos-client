@@ -1,7 +1,6 @@
 import { Draggable } from 'react-beautiful-dnd';
 import DragHandleIcon from '@mui/icons-material/DragHandle';
 import ListItem from '@mui/material/ListItem';
-import Typography from '@mui/material/Typography';
 import CldThumb from '../Images/CldThumb';
 
 const flexCol = {
@@ -50,9 +49,9 @@ export default function DragItem({ children, cloudName, image, index }) {
             }}
           >
             <div style={flexCol}>
-              <Typography variant="body2" sx={{ marginBottom: '.5rem' }}>
+              <span style={{ fontSize: '.875rem', marginBottom: '.5rem' }}>
                 {image.title}
-              </Typography>
+              </span>
               <div style={spaceBetween}>
                 <div>{children}</div>
                 <DragHandleIcon sx={{ placeSelf: 'start end' }} />

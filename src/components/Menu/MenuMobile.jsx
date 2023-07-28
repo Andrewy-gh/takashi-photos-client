@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import DrawerMenu from './DrawerMenu';
-import { Typography } from '@mui/material';
 
 const flex = {
   display: 'flex',
@@ -32,9 +31,7 @@ export default function MenuMobile({
       <div style={flex}>
         <Link to="/">
           <div onClick={() => handleFilterChange(null)}>
-            <Typography as="h1" sx={logoStyle}>
-              TAKASHI MIYAZAKI
-            </Typography>
+            <h1 style={logoStyle}>TAKASHI MIYAZAKI</h1>
           </div>
         </Link>
         <DrawerMenu
