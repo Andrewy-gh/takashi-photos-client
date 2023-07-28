@@ -7,9 +7,10 @@ export const NotificationProvider = ({ children }) => {
   const [message, setMessage] = useState('');
   const [severity, setSeverity] = useState('success');
   const handleError = (error) => {
+    const errorMessage = error?.response?.data?.error || error;
     setOpen(true);
     setSeverity('error');
-    setMessage(`Error: ${error.response.data.error}`);
+    setMessage(`Error: ${errorMessage}`);
   };
 
   return (

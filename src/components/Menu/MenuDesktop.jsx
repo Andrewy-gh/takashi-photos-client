@@ -61,10 +61,8 @@ export default function MenuDesktop({
                 {nav.name}
               </li>
             ) : renderLink(nav, loggedIn, token) ? (
-              <li style={typographyStyle}>
-                <Link to={nav.path} key={nav.id}>
-                  {nav.name}
-                </Link>
+              <li key={nav.id} style={typographyStyle}>
+                <Link to={nav.path}>{nav.name}</Link>
               </li>
             ) : null
           )}
