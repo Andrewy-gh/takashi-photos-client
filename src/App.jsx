@@ -1,6 +1,7 @@
-import React, { useEffect, Suspense } from 'react';
+import { lazy, useEffect, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
+import Notification from './components/Notification';
 import { setToken } from './services/api';
 import { getToken } from './services/authStorage';
 import { useAuth } from './hooks/useAuth';
@@ -9,10 +10,10 @@ import { useImage } from './hooks/useImage';
 import { disableReactDevTools } from '@fvilers/disable-react-devtools';
 if (process.env.NODE_ENV === 'production') disableReactDevTools();
 
-const Edit = React.lazy(() => import('./pages/Edit'));
-const Login = React.lazy(() => import('./pages/Login'));
-const Profile = React.lazy(() => import('./pages/Profile'));
-const RequireAuth = React.lazy(() => import('./components/RequireAuth'));
+const Edit = lazy(() => import('./pages/Edit'));
+const Login = lazy(() => import('./pages/Login'));
+const Profile = lazy(() => import('./pages/Profile'));
+const RequireAuth = lazy(() => import('./components/RequireAuth'));
 
 export default function App() {
   const { cloudName } = useCloudinary();
@@ -80,6 +81,7 @@ export default function App() {
             element={<Profile loggedIn={loggedIn} token={token} />}
           />
         </Routes>
+        <Notification />
       </Suspense>
     </BrowserRouter>
   );
