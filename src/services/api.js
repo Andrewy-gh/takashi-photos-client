@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { removeToken } from './authStorage';
 
 const api = axios.create({
   baseURL: 'https://takashi-photos.fly.dev',
@@ -21,6 +22,22 @@ api.interceptors.request.use(
     return config;
   },
   (error) => {
+    return Promise.reject(error);
+  }
+);
+
+api.interceptors.response.use(
+  (response) => {
+    // If the 'Clear-Token' header is present, delete the token from local storage
+    if (response.headers['Clear-Token'] === 'true') {
+      // localStorage.removeItem('loggedPortfolioUser'); // Replace 'your_jwt_token_key' with your actual JWT token key
+      removeToken()
+    }
+    return response;
+  },
+  (error) => {
+    // Handle error
+    console.error('API Error:', error);
     return Promise.reject(error);
   }
 );
