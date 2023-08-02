@@ -2,7 +2,8 @@ import axios from 'axios';
 import { removeToken } from './authStorage';
 
 const api = axios.create({
-  baseURL: 'https://takashi-photos.fly.dev',
+  baseURL: 'http://localhost:3001',
+  // baseURL: 'https://takashi-photos.fly.dev',
   withCredentials: true,
 });
 
@@ -17,7 +18,8 @@ api.interceptors.request.use(
     if (token) {
       config.headers.Authorization = token;
       config.headers['Cache-Control'] = 'public';
-      config.headers['max-age'] = '3600';
+      config.headers['max-age'] = '15';
+      // config.headers['max-age'] = '3600';
     }
     return config;
   },
@@ -28,16 +30,15 @@ api.interceptors.request.use(
 
 api.interceptors.response.use(
   (response) => {
-    // If the 'Clear-Token' header is present, delete the token from local storage
-    if (response.headers['Clear-Token'] === 'true') {
-      // localStorage.removeItem('loggedPortfolioUser'); // Replace 'your_jwt_token_key' with your actual JWT token key
-      removeToken()
-    }
+    console.log('response headers', response.headers);
     return response;
   },
   (error) => {
-    // Handle error
-    console.error('API Error:', error);
+    if (error.response.data.error === 'token expired') {
+      console.log('token expired');
+      removeToken();
+      return Promise.reject('token expired');
+    }
     return Promise.reject(error);
   }
 );

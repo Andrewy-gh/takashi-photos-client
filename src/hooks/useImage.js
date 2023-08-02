@@ -1,10 +1,12 @@
 import { useContext, useEffect, useState } from 'react';
 import imageServices from '../services/image';
 import NotificationContext from '../contexts/NotificationContext';
+import { useAuth } from './useAuth';
 
 export function useImage() {
   const [images, setImages] = useState([]);
   const { setOpen, setMessage } = useContext(NotificationContext);
+  const { handleLogout } = useAuth();
 
   const getAllImages = async () => {
     const initialImages = await imageServices.getAllImages();
@@ -16,11 +18,20 @@ export function useImage() {
   }, []);
 
   const uploadNewImage = async (content) => {
-    const newImage = await imageServices.uploadNewImage(content);
-    if (newImage.success) {
-      setOpen(true);
-      setMessage(newImage.message);
-      setImages(images.concat(newImage.data));
+    try {
+      const newImage = await imageServices.uploadNewImage(content);
+      if (newImage.success) {
+        setOpen(true);
+        setMessage(newImage.message);
+        setImages(images.concat(newImage.data));
+      }
+    } catch (error) {
+      console.error('showing error: ');
+      console.error(error);
+      if (error === 'token expired') {
+        console.log('logging out');
+        handleLogout();
+      }
     }
   };
 
@@ -47,11 +58,20 @@ export function useImage() {
   };
 
   const updateImageOrder = async (order) => {
-    const updatedImageOrder = await imageServices.updateImageOrder(order);
-    if (updatedImageOrder.success) {
-      setOpen(true);
-      setMessage(updatedImageOrder.message);
-      setImages(updatedImageOrder.data);
+    try {
+      const updatedImageOrder = await imageServices.updateImageOrder(order);
+      if (updatedImageOrder.success) {
+        setOpen(true);
+        setMessage(updatedImageOrder.message);
+        setImages(updatedImageOrder.data);
+      }
+    } catch (error) {
+      console.error('showing error: ');
+      console.error(error);
+      if (error === 'token expired') {
+        console.log('logging out');
+        handleLogout();
+      }
     }
   };
 
