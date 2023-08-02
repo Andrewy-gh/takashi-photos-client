@@ -1,6 +1,6 @@
 import { createContext, useState } from 'react';
 
-const NotificationContext = createContext();
+export const NotificationContext = createContext();
 
 export const NotificationProvider = ({ children }) => {
   const [open, setOpen] = useState(false);
@@ -29,5 +29,3 @@ export const NotificationProvider = ({ children }) => {
     </NotificationContext.Provider>
   );
 };
-
-export default NotificationContext;

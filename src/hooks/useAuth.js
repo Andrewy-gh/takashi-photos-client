@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { login } from '../services/auth';
 import { removeToken } from '../services/authStorage';
-import NotificationContext from '../contexts/NotificationContext';
+import { NotificationContext } from '../contexts/NotificationContext';
 import { tryCatch } from '../utils/tryCatch';
 
 export function useAuth() {

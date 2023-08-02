@@ -1,8 +1,10 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import IconButton from '@mui/material/IconButton';
 import { theme } from '../styles/styles';
 import ProfileCover from '../assets/profile-cover.avif';
+import { AuthContext } from '../contexts/AuthContext';
 
 const BodyStyle = {
   fontFamily: 'Judson',
@@ -24,7 +26,8 @@ const typographyStyle = {
   cursor: 'pointer',
 };
 
-export default function Profile({ loggedIn, token }) {
+export default function Profile() {
+  const { loggedIn, token } = useContext(AuthContext);
   return (
     <div
       style={{

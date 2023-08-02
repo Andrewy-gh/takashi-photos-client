@@ -2,8 +2,7 @@ import axios from 'axios';
 import { removeToken } from './authStorage';
 
 const api = axios.create({
-  baseURL: 'http://localhost:3001',
-  // baseURL: 'https://takashi-photos.fly.dev',
+  baseURL: 'https://takashi-photos.fly.dev',
   withCredentials: true,
 });
 
@@ -30,12 +29,10 @@ api.interceptors.request.use(
 
 api.interceptors.response.use(
   (response) => {
-    console.log('response headers', response.headers);
     return response;
   },
   (error) => {
     if (error.response.data.error === 'token expired') {
-      console.log('token expired');
       removeToken();
       return Promise.reject('token expired');
     }

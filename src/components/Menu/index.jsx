@@ -4,14 +4,12 @@ import MenuMobile from './MenuMobile';
 import { theme } from '../../styles/styles';
 import { navigation } from '../../data/index';
 
-export default function Menu({
-  filter,
-  handleFilterChange,
-  handleLogout,
-  loggedIn,
-  token,
-}) {
+import { AuthContext } from '../../contexts/AuthContext';
+import { useContext } from 'react';
+
+export default function Menu({ filter, handleFilterChange }) {
   const isMobile = useMediaQuery(theme.breakpoints.down('tablet'));
+  const { loggedIn, token, handleLogout } = useContext(AuthContext);
 
   return (
     <>
