@@ -17,8 +17,7 @@ api.interceptors.request.use(
     if (token) {
       config.headers.Authorization = token;
       config.headers['Cache-Control'] = 'public';
-      config.headers['max-age'] = '15';
-      // config.headers['max-age'] = '3600';
+      config.headers['max-age'] = '3600';
     }
     return config;
   },
