@@ -1,10 +1,10 @@
-import { lazy, useEffect, Suspense } from 'react';
+import { lazy, Suspense, useContext, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Notification from './components/Notification';
 import { setToken } from './services/api';
 import { getToken } from './services/authStorage';
-import { useAuth } from './hooks/useAuth';
+import { AuthContext } from './contexts/AuthContext';
 import { useCloudinary } from './hooks/useCloudinary';
 import { useImage } from './hooks/useImage';
 import { disableReactDevTools } from '@fvilers/disable-react-devtools';
@@ -24,8 +24,7 @@ export default function App() {
     updateImageDetails,
     removeOneImage,
   } = useImage();
-  const { loggedIn, token, handleLogin, handleLogout, setCredentials } =
-    useAuth();
+  const { setCredentials } = useContext(AuthContext);
 
   useEffect(() => {
     const loggedUser = getToken();
@@ -41,27 +40,11 @@ export default function App() {
         <Routes>
           <Route
             path="/"
-            element={
-              <Home
-                cloudName={cloudName}
-                images={images}
-                loggedIn={loggedIn}
-                handleLogout={handleLogout}
-                token={token}
-              />
-            }
+            element={<Home cloudName={cloudName} images={images} />}
           />
-          <Route
-            path="/login"
-            element={
-              <Login
-                loggedIn={loggedIn}
-                token={token}
-                handleLogin={handleLogin}
-              />
-            }
-          />
-          <Route element={<RequireAuth token={token} loggedIn={loggedIn} />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route element={<RequireAuth />}>
             <Route
               path="/edit"
               element={
@@ -76,10 +59,6 @@ export default function App() {
               }
             />
           </Route>
-          <Route
-            path="/profile"
-            element={<Profile loggedIn={loggedIn} token={token} />}
-          />
         </Routes>
         <Notification />
       </Suspense>

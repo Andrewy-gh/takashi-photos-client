@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import IconButton from '@mui/material/IconButton';
@@ -8,6 +8,8 @@ import { theme } from '../styles/styles';
 import ProfileCover from '../assets/profile-cover.avif';
 import { saveToken } from '../utils/authStorage';
 import { setToken } from '../services/api';
+
+import { AuthContext } from '../contexts/AuthContext';
 
 const flex = {
   display: 'flex',
@@ -41,10 +43,11 @@ const formStyle = {
   padding: 2,
 };
 
-export default function Login({ loggedIn, token, handleLogin }) {
+export default function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { loggedIn, token, handleLogin } = useContext(AuthContext);
 
   useEffect(() => {
     if (loggedIn && token) {
@@ -56,7 +59,7 @@ export default function Login({ loggedIn, token, handleLogin }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    handleLogin({ email, password });
+    await handleLogin({ email, password });
   };
 
   return (

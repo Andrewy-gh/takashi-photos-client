@@ -1,7 +1,7 @@
 import { forwardRef, useContext } from 'react';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
-import NotificationContext from '../contexts/NotificationContext';
+import { NotificationContext } from '../contexts/NotificationContext';
 
 const Alert = forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;

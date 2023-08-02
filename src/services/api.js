@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { removeToken } from './authStorage';
 
 const api = axios.create({
   baseURL: 'https://takashi-photos.fly.dev',
@@ -16,11 +17,25 @@ api.interceptors.request.use(
     if (token) {
       config.headers.Authorization = token;
       config.headers['Cache-Control'] = 'public';
-      config.headers['max-age'] = '3600';
+      config.headers['max-age'] = '15';
+      // config.headers['max-age'] = '3600';
     }
     return config;
   },
   (error) => {
+    return Promise.reject(error);
+  }
+);
+
+api.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    if (error.response.data.error === 'token expired') {
+      removeToken();
+      return Promise.reject('token expired');
+    }
     return Promise.reject(error);
   }
 );
