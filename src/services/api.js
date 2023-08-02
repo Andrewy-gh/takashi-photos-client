@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { removeToken } from './authStorage';
 
 const api = axios.create({
   baseURL: 'https://takashi-photos.fly.dev',
@@ -32,7 +31,6 @@ api.interceptors.response.use(
   },
   (error) => {
     if (error.response.data.error === 'token expired') {
-      removeToken();
       return Promise.reject('token expired');
     }
     return Promise.reject(error);
