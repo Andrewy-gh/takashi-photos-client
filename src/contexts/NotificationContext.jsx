@@ -13,6 +13,12 @@ export const NotificationProvider = ({ children }) => {
     setMessage(`Error: ${errorMessage}`);
   };
 
+  const setError = (message) => {
+    setOpen(true);
+    setSeverity('error');
+    setMessage(`Error: ${message}`);
+  };
+
   return (
     <NotificationContext.Provider
       value={{
@@ -23,6 +29,7 @@ export const NotificationProvider = ({ children }) => {
         severity,
         setSeverity,
         handleError,
+        setError,
       }}
     >
       {children}

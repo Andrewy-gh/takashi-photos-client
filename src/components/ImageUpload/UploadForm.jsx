@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 
 import Button from '@mui/material/Button';
@@ -17,6 +17,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import CloseIcon from '@mui/icons-material/Close';
 import { types } from '../../data';
 import { theme } from '../../styles/styles';
+import { NotificationContext } from '../../contexts/NotificationContext';
 
 const fieldSpacing = {
   display: 'flex',
@@ -69,6 +70,8 @@ export default function UploadForm({
     },
   });
 
+  const { setError } = useContext(NotificationContext);
+
   useEffect(() => {
     if (formState.isSubmitSuccessful) {
       reset({ title: '', type: '', file: undefined });
@@ -79,6 +82,10 @@ export default function UploadForm({
   const isMobile = useMediaQuery(theme.breakpoints.down('tablet'));
 
   const onSubmit = (data) => {
+    if (!data.files) {
+      setError('No images to upload');
+      return;
+    }
     submitImageData(data);
   };
 
