@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import IconButton from '@mui/material/IconButton';
 import { theme } from '../styles/styles';
-import ProfileCover from '../assets/profile-cover.avif';
+import ProfileCover from '../assets/profile-cover.webp';
 import { AuthContext } from '../contexts/AuthContext';
 
 const BodyStyle = {
@@ -56,11 +56,11 @@ export default function Profile() {
       >
         <p style={BodyStyle}>
           My name is Takashi Miyazaki. I&apos;m a university student in Tokyo,
-          studying language and international relations. I been in photography
-          for 5 years and published work on various platforms. I usually shoot
-          nature. My aim to create colors and images that are not
-          over-processed, just memories and colors that make you remember the
-          scene when you look at it.
+          studying language and international relations. I&apos;ve a photograper
+          for 5 years with published work on various platforms. Nature shots are
+          my preference. My aim is to create images with colors that are not
+          over-processed, and invokes emotions and memories of a scene as if you
+          were present.
         </p>
         <h3 style={HeaderStyle}>Genres:</h3>
         <p style={BodyStyle}>Macro, Landscape, Animals, Nature, etc.</p>

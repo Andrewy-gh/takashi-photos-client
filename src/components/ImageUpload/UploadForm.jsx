@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 
 import Button from '@mui/material/Button';
@@ -17,7 +17,6 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import CloseIcon from '@mui/icons-material/Close';
 import { types } from '../../data';
 import { theme } from '../../styles/styles';
-import { NotificationContext } from '../../contexts/NotificationContext';
 
 const fieldSpacing = {
   display: 'flex',
@@ -61,7 +60,7 @@ export default function UploadForm({
     handleSubmit,
     reset,
     formState,
-    formState: { isSubmitSuccessful },
+    formState: { errors, isSubmitSuccessful },
   } = useForm({
     defaultValues: {
       title: '',
@@ -69,8 +68,6 @@ export default function UploadForm({
       file: undefined,
     },
   });
-
-  const { setError } = useContext(NotificationContext);
 
   useEffect(() => {
     if (formState.isSubmitSuccessful) {
@@ -82,10 +79,6 @@ export default function UploadForm({
   const isMobile = useMediaQuery(theme.breakpoints.down('tablet'));
 
   const onSubmit = (data) => {
-    if (!data.files) {
-      setError('No images to upload');
-      return;
-    }
     submitImageData(data);
   };
 
@@ -186,6 +179,9 @@ export default function UploadForm({
           control={control}
           defaultValue=""
         />
+        {errors.file?.type === 'required' && (
+          <p role="alert">Image is required</p>
+        )}
       </DialogContent>
       <DialogActions
         sx={{ display: 'flex', justifyContent: 'center', gap: '1.25rem' }}
@@ -197,7 +193,7 @@ export default function UploadForm({
             type="file"
             hidden
             multiple
-            {...register('file')}
+            {...register('file', { required: 'Image is required' })}
             onChange={(e) => {
               prepareImagePreview(e.target.files);
               register('file').onChange(e);

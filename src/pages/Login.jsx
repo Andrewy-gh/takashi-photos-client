@@ -5,7 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { theme } from '../styles/styles';
-import ProfileCover from '../assets/profile-cover.avif';
+import ProfileCover from '../assets/profile-cover.webp';
 import { saveToken } from '../utils/authStorage';
 import { setToken } from '../services/api';
 

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import Default from '../../assets/default.avif';
+import Default from '../../assets/default.webp';
 import { renderLink } from '../../utils/navigation';
 import { theme } from '../../styles/styles';
 
