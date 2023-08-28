@@ -5,6 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import DragDrop from '../components/DragDrop/index';
 import { theme } from '../styles/styles';
 import ImageUpload from '../components/ImageUpload';
+import FloatingButton from '../components/FloatingButton';
 
 export default function Edit({
   cloudName,
@@ -45,6 +46,7 @@ export default function Edit({
         updateImageDetails={updateImageDetails}
         removeOneImage={removeOneImage}
       />
+      <FloatingButton />
     </>
   );
 }

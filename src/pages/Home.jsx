@@ -2,6 +2,7 @@ import Grid from '@mui/material/Grid';
 import Menu from '../components/Menu';
 import Images from '../components/Images/index';
 import { useFilter } from '../hooks/useFilter';
+import FloatingButton from '../components/FloatingButton';
 
 export default function Home({ cloudName, images }) {
   const { filter, handleFilterChange } = useFilter();
@@ -19,6 +20,7 @@ export default function Home({ cloudName, images }) {
         </Grid>
         <Grid item mobile={12} tablet={9} sx={{ tablet: { padding: '.5em' } }}>
           <Images cloudName={cloudName} images={filteredImages} />
+          <FloatingButton />
         </Grid>
       </Grid>
     </>
