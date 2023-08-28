@@ -8,16 +8,14 @@ const Alert = forwardRef(function Alert(props, ref) {
 });
 
 export default function Notification() {
-  const { open, setOpen, message, setMessage, severity, setSeverity } =
+  const { open, message, severity, resetMessages } =
     useContext(NotificationContext);
 
   const handleClose = (_, reason) => {
     if (reason === 'clickaway') {
       return;
     }
-    setOpen(false);
-    setMessage('');
-    setSeverity('success');
+    resetMessages();
   };
 
   return (

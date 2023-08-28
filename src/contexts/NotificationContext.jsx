@@ -6,6 +6,10 @@ export const NotificationProvider = ({ children }) => {
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState('');
   const [severity, setSeverity] = useState('success');
+  const handleSuccess = (message) => {
+    setOpen(true);
+    setMessage(message);
+  };
   const handleError = (error) => {
     const errorMessage = error?.response?.data?.error || error;
     setOpen(true);
@@ -13,23 +17,21 @@ export const NotificationProvider = ({ children }) => {
     setMessage(`Error: ${errorMessage}`);
   };
 
-  const setError = (message) => {
-    setOpen(true);
-    setSeverity('error');
-    setMessage(`Error: ${message}`);
+  const resetMessages = () => {
+    setOpen(false);
+    setMessage('');
+    setSeverity('success');
   };
 
   return (
     <NotificationContext.Provider
       value={{
         open,
-        setOpen,
         message,
-        setMessage,
         severity,
-        setSeverity,
+        handleSuccess,
         handleError,
-        setError,
+        resetMessages,
       }}
     >
       {children}

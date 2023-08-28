@@ -40,7 +40,7 @@ export default function DragDrop({
     setImageOrder(images);
   }, [images]);
 
-  const handleOnDragEnd = (result) => {
+  const handleOnDragEnd = async (result) => {
     if (!result.destination) return;
     const images = Array.from(imageOrder);
     const [reorderedImages] = images.splice(result.source.index, 1);

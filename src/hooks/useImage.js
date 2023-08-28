@@ -5,7 +5,7 @@ import { NotificationContext } from '../contexts/NotificationContext';
 
 export function useImage() {
   const [images, setImages] = useState([]);
-  const { setOpen, setMessage } = useContext(NotificationContext);
+  const { handleSuccess, handleError } = useContext(NotificationContext);
   const { handleLogout } = useContext(AuthContext);
 
   const getAllImages = async () => {
@@ -21,15 +21,15 @@ export function useImage() {
     try {
       const newImage = await imageServices.uploadNewImage(content);
       if (newImage.success) {
-        setOpen(true);
-        setMessage(newImage.message);
+        handleSuccess(newImage.message);
         setImages(images.concat(newImage.data));
       }
     } catch (error) {
       if (error === 'token expired') {
         handleLogout();
+      } else {
+        handleError(error);
       }
-      console.error(error);
     }
   };
 
@@ -37,8 +37,7 @@ export function useImage() {
     try {
       const updatedImage = await imageServices.updateImageDetails(id, content);
       if (updatedImage.success) {
-        setOpen(true);
-        setMessage(updatedImage.message);
+        handleSuccess(updatedImage.message);
         const newImages = images.map((image) =>
           image.id === id ? updatedImage.data : image
         );
@@ -47,8 +46,9 @@ export function useImage() {
     } catch (error) {
       if (error === 'token expired') {
         handleLogout();
+      } else {
+        handleError(error);
       }
-      console.error(error);
     }
   };
 
@@ -56,16 +56,16 @@ export function useImage() {
     try {
       const response = await imageServices.removeOneImage(id);
       if (response.status === 204) {
-        setOpen(true);
-        setMessage('Successfully removed image');
+        handleSuccess('Successfully removed image');
         const newState = images.filter((image) => image.id !== id);
         setImages(newState);
       }
     } catch (error) {
       if (error === 'token expired') {
         handleLogout();
+      } else {
+        handleError(error);
       }
-      console.error(error);
     }
   };
 
@@ -73,15 +73,16 @@ export function useImage() {
     try {
       const updatedImageOrder = await imageServices.updateImageOrder(order);
       if (updatedImageOrder.success) {
-        setOpen(true);
-        setMessage(updatedImageOrder.message);
+        handleSuccess(updatedImageOrder.message);
         setImages(updatedImageOrder.data);
+        return { success: true };
       }
     } catch (error) {
       if (error === 'token expired') {
         handleLogout();
+      } else {
+        handleError(error);
       }
-      console.error(error);
     }
   };
 

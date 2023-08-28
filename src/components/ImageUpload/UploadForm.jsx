@@ -53,7 +53,6 @@ export default function UploadForm({
   previewImages,
   submitImageData,
 }) {
-  // const dispatch = useDispatch();
   const {
     control,
     register,
