@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import imageServices from '../services/image';
 import { AuthContext } from '../contexts/AuthContext';
 import { NotificationContext } from '../contexts/NotificationContext';
+import configServices from '../services/config';
 
 export function useImage() {
   const [images, setImages] = useState([]);
@@ -10,7 +11,7 @@ export function useImage() {
 
   const getAllImages = async () => {
     const initialImages = await imageServices.getAllImages();
-    setImages(initialImages);
+    if (initialImages) setImages(initialImages);
   };
 
   useEffect(() => {

@@ -7,6 +7,8 @@ import { getToken } from './services/authStorage';
 import { AuthContext } from './contexts/AuthContext';
 import { useCloudinary } from './hooks/useCloudinary';
 import { useImage } from './hooks/useImage';
+import configServices from './services/config';
+
 import { disableReactDevTools } from '@fvilers/disable-react-devtools';
 if (process.env.NODE_ENV === 'production') disableReactDevTools();
 
@@ -25,6 +27,20 @@ export default function App() {
     removeOneImage,
   } = useImage();
   const { setCredentials } = useContext(AuthContext);
+
+  useEffect(() => {
+    const checkSetup = async () => {
+      await configServices.checkSetup();
+    };
+    checkSetup();
+  }, []);
+
+  useEffect(() => {
+    const createImageOrder = async () => {
+      await configServices.createImageOrder();
+    };
+    createImageOrder();
+  }, []);
 
   useEffect(() => {
     const loggedUser = getToken();
