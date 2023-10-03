@@ -17,7 +17,7 @@ export default function Edit({
 }) {
   let content;
   if (!images.length) {
-    content = 'No images';
+    content = <h1 style={{ textAlign: 'center' }}>No images uploaded</h1>;
   } else {
     content = (
       <>

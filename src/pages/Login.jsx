@@ -56,9 +56,6 @@ export default function Login() {
   useEffect(() => {
     const checkAdmin = async () => {
       const res = await configServices.checkAdmin();
-      console.log('====================================');
-      console.log(res);
-      console.log('====================================');
       setAdminStatus(res.status);
     };
     checkAdmin();
@@ -75,10 +72,7 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (adminStatus === 'admin not present') {
-      const res = await configServices.createAdmin({ email, password });
-      console.log('====================================');
-      console.log('admin res: ', res);
-      console.log('====================================');
+      await configServices.createAdmin({ email, password });
     } else {
       await handleLogin({ email, password });
     }
