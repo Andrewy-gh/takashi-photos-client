@@ -13,7 +13,7 @@ export default function Images({ cloudName, images }) {
           paddingInline: '1rem',
         }}
       >
-        <h1>Please check back later for more content</h1>
+        <h1>Please check back later for content</h1>
       </div>
     );
   } else {
