@@ -8,9 +8,6 @@ export function useAdmin() {
 
   useEffect(() => {
     const checkAdmin = async () => {
-      console.log('====================================');
-      console.log('use effect running');
-      console.log('====================================');
       const res = await configServices.checkAdmin();
       setAdminStatus(res.status);
     };
@@ -20,9 +17,6 @@ export function useAdmin() {
   const createAdmin = async (credentials) => {
     try {
       const adminCreated = await configServices.createAdmin(credentials);
-      console.log('====================================');
-      console.log(adminCreated);
-      console.log('====================================');
       if (adminCreated.success) {
         handleSuccess(adminCreated.message);
         setAdminStatus('Admin setup complete');
