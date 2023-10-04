@@ -11,7 +11,8 @@ import { setToken } from '../services/api';
 
 import { AuthContext } from '../contexts/AuthContext';
 
-import configServices from '../services/config';
+// import configServices from '../services/config';
+import { useAdmin } from '../hooks/useAdmin';
 
 const flex = {
   display: 'flex',
@@ -50,19 +51,7 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { loggedIn, token, handleLogin } = useContext(AuthContext);
-
-  const [adminStatus, setAdminStatus] = useState('');
-
-  useEffect(() => {
-    const checkAdmin = async () => {
-      const res = await configServices.checkAdmin();
-      console.log('====================================');
-      console.log(res);
-      console.log('====================================');
-      setAdminStatus(res.status);
-    };
-    checkAdmin();
-  }, []);
+  const { adminStatus, createAdmin } = useAdmin();
 
   useEffect(() => {
     if (loggedIn && token) {
@@ -74,11 +63,10 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (adminStatus === 'admin not present') {
-      const res = await configServices.createAdmin({ email, password });
-      console.log('====================================');
-      console.log('admin res: ', res);
-      console.log('====================================');
+    if (adminStatus === 'No admin present') {
+      await createAdmin({ email, password });
+      setEmail('');
+      setPassword('');
     } else {
       await handleLogin({ email, password });
     }
@@ -86,10 +74,11 @@ export default function Login() {
 
   let title;
   let button;
-  if (adminStatus === 'admin not present') {
+  if (adminStatus === 'No admin present') {
     title = 'Register New Admin';
     button = 'Create Admin';
-  } else {
+  }
+  if (adminStatus === 'Admin setup complete') {
     title = 'Log in';
     button = 'Submit';
   }
